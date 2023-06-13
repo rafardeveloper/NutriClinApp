@@ -1,0 +1,17 @@
+<div class="mt-2">
+    <label> {{element.question1}} </label><br/>
+    <div class="form-check form-check-inline">
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="{{element.mealName}}Yes" id="{{element.mealName}}Yes" (change)="onFormChange()" value=sim [(ngModel)]="hasMeal">
+            <label class="form-check-label" for="{{element.mealName}}Yes">Sim</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="{{element.mealName}}No" id="{{element.mealName}}No" (change)="onFormChange()" value=não [(ngModel)]="hasMeal">
+            <label class="form-check-label" for="{{element.mealName}}No">Não</label>
+        </div>
+    </div>
+    <br *ngIf="hasMeal"/>
+    <label for="mealTimeInput" *ngIf="hasMeal==='sim'">{{element.question2}}</label>
+    <br *ngIf="hasMeal==='sim'">
+    <input type="time" id="mealTimeInput" class="form-control-sm" class="ms-3" *ngIf="hasMeal==='sim'" (change)="onFormChange()" [(ngModel)]="mealTime" name="mealTimeInput">
+</div>

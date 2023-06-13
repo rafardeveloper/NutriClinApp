@@ -1,0 +1,129 @@
+<div class="container">
+    <div class="row">
+        <div>
+            <h1 align="center">NitriClin App</h1>
+        </div>
+        <div class="d-flex flex-column">
+            <label for="nameInput">Nome:</label>
+            <input type="text" id="nameInput" class="form-control" [(ngModel)]="name" name="nameInput"/>
+
+            <label for="patitentAgeInput" class="mt-2">Idade:</label>
+            <input type="text" id="patitentAgeInput" class="form-control" [(ngModel)]="age" name = "patientAgeInput"/>
+            <label class = "fs-6 fw-light" *ngIf="isNotNumber(age)" style="color: red;">*Este campo deve conter apenas números </label>
+            
+            <label for="emailInput" class="mt-2">Email:</label>
+            <input type="email" id="emailInput" class="form-control" [(ngModel)]="email" name="patitentEmail"/>
+
+            <label for="objectiveInput" class="mt-2">Objetivo da consulta:</label>
+            <input type="text" id="objectiveInput" class="form-control" [(ngModel)]="objective" name="objectiveInput">
+
+            <label class="form-check-label mt-2" >Pratica alguma atividade física?</label>
+            <div class="form-check form-check-inline">
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" value="Sim" id="radioPhysicalYes" name="radioPhysicalYes" [(ngModel)]="hasPhysicalActivity">
+                    <label class="form-check-label" for="radioPhysicalYes">Sim</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" value="Não" id="radioPhysicalno" name="radioPhysicalno" [(ngModel)]="hasPhysicalActivity">
+                    <label class="form-check-label" for="radioPhysicalno">Não</label>
+                </div>   
+            </div>   
+            
+            <label for="physuialActivityInput" *ngIf="hasPhysicalActivity == 'Sim'">Qual atividade física?</label>
+            <input type="text" id="physuialActivityInput" class="form-control" *ngIf="hasPhysicalActivity == 'Sim'" [(ngModel)]="physicalActivity" name="physuialActivityInput">
+            
+
+            <label class="form-check-label mt-2">Tem algum problema de saúde?</label>
+            <div class="form-check form-check-inline">
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" value="Sim" id="radioHealthYes" name="radioHealthYes" [(ngModel)]="hasHealthProblem">
+                    <label class="form-check-label" for="radioHealthYes">Sim</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" value="Não" id="radioHealthNo" name="radioHealthNo" [(ngModel)]="hasHealthProblem">
+                    <label class="form-check-label" for="radioHealthNo">Não</label>
+                </div>   
+            </div>   
+
+            <label for="healthProblemInput" *ngIf="hasHealthProblem=='Sim'">Qual o problema de saúde?</label>
+            <input type="text" id="healthProblemInput" class="form-control" [(ngModel)]="healthProblem" *ngIf="hasHealthProblem=='Sim'" name="healthProblemInput" >
+            
+
+            <label class="mt-2" >Utiliza algum suplemento/remédio/fórmula?</label>
+            <div class="form-check form-check-inline">
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="radioRemedyYes" id="radioRemedyYes" value="sim" [(ngModel)]="hasRemedyOrSupplement">
+                    <label class="form-check-label" for="radioRemedyYes">Sim</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="radioRemedyNo" id="radioRemedyNo" value="não" [(ngModel)]="hasRemedyOrSupplement">
+                    <label class="form-check-label" for="radioRemedyNo">Não</label>
+                </div>
+            </div> 
+            <label for="remedyOrSupplementInput" *ngIf="hasRemedyOrSupplement=='sim'">Qual/quais suplemento/remédio/fórmula?</label>
+            <input type="text" id="remedyOrSupplementInput" class="form-control" *ngIf="hasRemedyOrSupplement=='sim'" [(ngModel)]="remedyOrSupplement" name="remedyOrSupplementInput">
+            
+
+            <label class="mt-2">Ritmo Intestinal:</label>
+            <div class="form-check form-check-inline">
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="bowelRadio" id="normal" value="normal" [(ngModel)]="bowelRhythm">
+                    <label class="form-check-label" for="inlineRadio1">Normal</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="bowelRadio" id="lento" value="lento" [(ngModel)]="bowelRhythm">
+                    <label class="form-check-label" for="inlineRadio2">Lento</label>
+                </div>               
+            </div>
+
+            <label class="mt-1">Tem exame de sangue?</label>
+            <div class="form-check form-check-inline">
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="bloodTestYes" id="bloodTestYes" value="sim" [(ngModel)]="hasBloodTest">
+                    <label class="form-check-label" for="bloodTestYes">Sim</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="bloodTestNo" id="bloodTestNo" value="não" [(ngModel)]="hasBloodTest">
+                    <label class="form-check-label" for="bloodTestNo">Não</label>
+                </div>
+            </div> 
+
+            <app-meal-time 
+                [mealElement]="elementBreakfast"
+                [mealData]="breakfast"
+                (getMealData)="onFormChanged($event)"
+            ></app-meal-time>
+            <app-meal-time
+                [mealElement]="elementMorningSnack"
+                [mealData]="morningSnack"
+                (getMealData)="onFormChanged($event)"
+            ></app-meal-time>
+            <app-meal-time
+                [mealElement]="elementLunch"
+                [mealData]="lunch"
+                (getMealData)="onFormChanged($event)"
+            ></app-meal-time>
+            <app-meal-time
+                [mealElement]="elementAfternoonSnack"
+                [mealData]="afternoonSnack"
+                (getMealData)="onFormChanged($event)"
+            ></app-meal-time>
+            <app-meal-time
+                [mealElement]="elementDinner"
+                [mealData]="dinner"
+                (getMealData)="onFormChanged($event)"
+            ></app-meal-time>
+            <app-meal-time
+                [mealElement]="elementSupper"
+                [mealData]="supper"
+                (getMealData)="onFormChanged($event)"
+            ></app-meal-time>
+            <p></p>
+            <button 
+                class="btn btn-primary"
+                [disabled]="onUpdateField()"
+            >Continuar</button>
+        
+        </div>
+    </div>
+</div>

@@ -1,5 +1,8 @@
 # NutriClinApp
 
+Simple  app where patients can give information and it will be send to the corresponding nutritionist. It's a gift for a friend so I'm doind it when I've free time.
+
+For my Git it'll be an example of a CRUD software on backend and a simple frontend solution.
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.0.1.
 
 ## Development server
